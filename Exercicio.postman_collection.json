@@ -11,6 +11,23 @@
 			"item": [
 				{
 					"name": "Criar Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -26,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"Miguel\",\r\n  \"email\": \"miguel@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"raw": "{\r\n  \"nome\": \"Theo\",\r\n  \"email\": \"238438438934@qa.com\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,6 +66,23 @@
 				},
 				{
 					"name": "Listar Usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar usuario da lista\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Fulano da Silva\");\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -74,7 +108,14 @@
 							"script": {
 								"exec": [
 									"const resposta = pm.response.json();\r",
-									"pm.globals.set(\"token\", resposta.authorization);"
+									"pm.globals.set(\"token\", resposta.authorization);\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Login realizado com sucesso\");\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -152,7 +193,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Validar produto da lista\", function () {\r",
-									"    pm.expect(pm.response.text()).to.include(\"IPhone XR\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"Samsung 60 polegadas\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code é 200\", function () {\r",
@@ -168,7 +209,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/produtos/rxf8eu3RUxApS4wk",
+							"raw": "http://localhost:3000/produtos/K6leHdftCeOJj8BJ",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -176,7 +217,7 @@
 							"port": "3000",
 							"path": [
 								"produtos",
-								"rxf8eu3RUxApS4wk"
+								"K6leHdftCeOJj8BJ"
 							]
 						}
 					},
@@ -184,13 +225,30 @@
 				},
 				{
 					"name": "Editar Produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzX3Rlc3RlQGViYWMuY29tLmJyIiwicGFzc3dvcmQiOiJ0ZXN0ZSIsImlhdCI6MTcyOTQ3MjYxNCwiZXhwIjoxNzI5NDczMjE0fQ.ufsG9fr13k9J1hG6wBDq4NIn7TarSwKBkwucKxxFj_4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzX3Rlc3RlQGViYWMuY29tLmJyIiwicGFzc3dvcmQiOiJ0ZXN0ZSIsImlhdCI6MTcyOTUzMzcyMSwiZXhwIjoxNzI5NTM0MzIxfQ.pAhXhRDF71OhXQm5fjfQZpkZRDjYCZQGhnPVEuLPHAw",
 									"type": "string"
 								}
 							]
@@ -243,7 +301,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzX3Rlc3RlQGViYWMuY29tLmJyIiwicGFzc3dvcmQiOiJ0ZXN0ZSIsImlhdCI6MTcyOTQ3MjcyNCwiZXhwIjoxNzI5NDczMzI0fQ.pcx0rfov3-l-T_imhry1vGupyS2RAEvyW_vReV_XHHo",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzX3Rlc3RlQGViYWMuY29tLmJyIiwicGFzc3dvcmQiOiJ0ZXN0ZSIsImlhdCI6MTcyOTUzMzcyMSwiZXhwIjoxNzI5NTM0MzIxfQ.pAhXhRDF71OhXQm5fjfQZpkZRDjYCZQGhnPVEuLPHAw",
 									"type": "string"
 								}
 							]
@@ -251,12 +309,214 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{local}}produtos/rxf8eu3RUxApS4wk",
+							"raw": "{{local}}produtos/9SRxUvgFMLif0Pc2",
 							"host": [
 								"{{local}}produtos"
 							],
 							"path": [
-								"rxf8eu3RUxApS4wk"
+								"9SRxUvgFMLif0Pc2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tentar criar usuario com e-mail existente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Este email já está sendo usado\");\r",
+									"});\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzX3Rlc3RlQGViYWMuY29tLmJyIiwicGFzc3dvcmQiOiJ0ZXN0ZSIsImlhdCI6MTcyOTQ3MDQ5NSwiZXhwIjoxNzI5NDcxMDk1fQ.QFjiz0kjQcv8C1qTlgsEDurAO2wA_KKejXy4gbeRvDc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Matheus\",\r\n  \"email\": \"matheus@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Usuario com e-mail em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"email não pode ficar em branco\");\r",
+									"});\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzX3Rlc3RlQGViYWMuY29tLmJyIiwicGFzc3dvcmQiOiJ0ZXN0ZSIsImlhdCI6MTcyOTQ3MDQ5NSwiZXhwIjoxNzI5NDcxMDk1fQ.QFjiz0kjQcv8C1qTlgsEDurAO2wA_KKejXy4gbeRvDc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Theo\",\r\n  \"email\": \"\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Usuario com nome em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"nome não pode ficar em branco\");\r",
+									"});\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzX3Rlc3RlQGViYWMuY29tLmJyIiwicGFzc3dvcmQiOiJ0ZXN0ZSIsImlhdCI6MTcyOTQ3MDQ5NSwiZXhwIjoxNzI5NDcxMDk1fQ.QFjiz0kjQcv8C1qTlgsEDurAO2wA_KKejXy4gbeRvDc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"\",\r\n  \"email\": \"28828282838373@qa.com\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar usuario inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar usuario da lista\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Usuário não encontrado\");\r",
+									"});\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/usuarios/s74SpWuzBzhaPc9a6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios",
+								"s74SpWuzBzhaPc9a6"
 							]
 						}
 					},
